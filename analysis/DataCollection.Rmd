@@ -23,6 +23,10 @@ We're collecting our data from a SQLite database. The titanic3 data was original
 We're using just a single table of data that has already been collated. Here is a quick overview of the data.
 
 ```{r quickdataview}
+#library(knitr)
+#library(DBI)
+#read_chunk("../data-raw/get_data.R")
+
 titanic_all<-dbReadTable(titanicdb, "titanic")
 knitr::kable(head(titanic_all))
 ```

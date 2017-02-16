@@ -79,6 +79,27 @@ cor(titanic_all_numeric,use="complete.obs")
 
 descrCor <-  cor(titanic_all)
 highCorr <- sum(abs(descrCor[upper.tri(descrCor)]) > .999)
-titanic_all2 <- 
+#titanic_all2 <- 
+caret::findCorrelation(cor(titanic_all_numeric[,-1],use="pairwise.complete.obs"))
 
 ```
+
+```{r processclass}
+convertclass <- function(x) {
+  ordered(x,
+          labels=c("3rd","2nd","1st"),
+          levels=c("3rd","2nd","1st"))
+  
+}
+
+titanic_train_c$pclass <-convertclass(titanic_train_c$pclass)
+titanic_test_c$pclass <-convertclass(titanic_test_c$pclass)
+
+str(titanic_train_c)
+
+titanic_train_c$embarked <- factor(titanic_train_c$embarked)
+titanic_test_c$embarked <- factor(titanic_test_c$embarked)
+
+
+```
+

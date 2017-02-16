@@ -60,3 +60,25 @@ dbWriteTable(titanicdb, "titanic", head(titanic_all), append=TRUE)
 ```
 
 Restore your original data with your get_data.R file.
+
+## Refined Titanic data
+
+```{r nextsteps}
+dummies <- dummyVars(survived ~ ., data = titanic_train_c)
+head(predict(dummies, newdata = titanic_train_c))
+head(dummies)
+nzv <- nearZeroVar(titanic_all, saveMetrics= TRUE)
+nzv[nzv$nzv,][1:10,]
+colnames(titanic_all)[caret::nearZeroVar(titanic_all)]
+
+numericcols <- sapply(titanic_all,is.numeric)
+titanic_all_numeric <- titanic_all[,numericcols]
+
+cor(titanic_all_numeric,use="complete.obs")
+#cor(na.omit(titanic_all_numeric))
+
+descrCor <-  cor(titanic_all)
+highCorr <- sum(abs(descrCor[upper.tri(descrCor)]) > .999)
+titanic_all2 <- 
+
+```
